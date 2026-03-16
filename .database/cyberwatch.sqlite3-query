@@ -1,8 +1,8 @@
 -- database: ./cyberwatch.db
 -- CREATE TABLE vulnerabilities (
---     id INTEGER PRIMARY KEY AUTOINCREMENT,
+-- id INTEGER PRIMARY KEY AUTOINCREMENT,
 --     vul_name TEXT NOT NULL,
---     owas_rank INTEGER
+--     owasp_rank INTEGER
 -- );
 
 -- CREATE TABLE incidents (
