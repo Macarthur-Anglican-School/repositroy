@@ -3,7 +3,7 @@ from sqlalchemy import create_engine, text
 
 app = Flask(__name__)
 
-engine = create_engine('sqlite:///database/cyberwatch.db') #link to the cyberwatch database here
+engine = create_engine('sqlite:///.database/cyberwatch.db') #link to the cyberwatch database here
 
 #route for index.html
 @app.route('/')
@@ -20,11 +20,14 @@ def home():
 @app.route('/incidents/<vul_id>')
 def incident_page(vul_id):
     # TASK 1: Connect to the database
-
+    with engine.connect() as database:
+        query = text('SELECT * FROM incidents WHERE vul_id = {};'.format(vul_id))
+        print(query)
+        result = database.execute(query).fetchall()
     # TASK 2: Fetch the Vulnerability Name for the heading (JOIN or separate query)
-
-    # TASK 3: Fetch all Incidents linked to this vul_id, return incidents list
     
+    # TASK 3: Fetch all Incidents linked to this vul_id, return incidents list
+    print(result)
     print(vul_id) #this is a print statement to help you understand what data is being returned
     return render_template('incidents.html', vulnerability = vul_id)
 
