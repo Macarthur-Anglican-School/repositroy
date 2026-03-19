@@ -25,11 +25,11 @@ def incident_page(vul_id):
         print(query)
         result = database.execute(query).fetchall()
     # TASK 2: Fetch the Vulnerability Name for the heading (JOIN or separate query)
-    
+        new_query = text()
     # TASK 3: Fetch all Incidents linked to this vul_id, return incidents list
     print(result)
     print(vul_id) #this is a print statement to help you understand what data is being returned
-    return render_template('incidents.html', vulnerability = vul_id)
+    return render_template('incidents.html', vulnerability = vul_id, message = "Hello Stirling!")
 
 
 
