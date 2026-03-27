@@ -6,6 +6,18 @@ Add an incident
 
 {% block content %}
 <form action = "/incidents" method="POST">
+    <label for='inc_name'>Incident Name:</label>
+    <input type='text' id='inc_name' name='inc_name'><br><br>
 
+    <label for='inc_url'>URL:</label>
+    <input type='text' id='inc_url' name='inc_url'><br><br>
+
+    <label for='inc_year'>Year:</label>
+    <input type='number' id='inc_year' name='inc_year'><br><br>
+
+    <label for='vul_id'>Rank:</label>
+    <input type='number' id='vul_id' name='vul_id'><br><br>
+
+    <input type='submit' value='Submit Incident'>
 </form>
 {% endblock %}

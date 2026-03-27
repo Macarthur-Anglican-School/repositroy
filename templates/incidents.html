@@ -9,7 +9,15 @@
 
 {% block content %}
 <!-- Use a for loop to display the incidents that match the vulnerability. -->
-
-<!-- Add the button for adding a new incident -->
-
+<div class="row">
+    {% for i in incidents %}
+    <div class="col-12 col-md-6 mb-3">
+        <div class="card p-3">
+            <h5>name: {{ i.inc_name }}</h5>
+            <a href={{ i.inc_url }} class="btn btn-primary">View</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<a href="/add-incident/" class="btn btn-primary">Add incident</a>
 {% endblock %}

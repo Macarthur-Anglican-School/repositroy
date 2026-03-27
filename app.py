@@ -10,8 +10,6 @@ engine = create_engine('sqlite:///.database/cyberwatch.db') #link to the cyberwa
 def home():
     
     with engine.connect() as connection:
-        # This way of connecting to the database 
-        # ensures that the connection is automatically closed as soon as the function finishes
         query = text('SELECT * FROM vulnerabilities ORDER BY owasp_rank;')
         result = connection.execute(query).fetchall()
 
@@ -25,12 +23,34 @@ def incident_page(vul_id):
         print(query)
         result = database.execute(query).fetchall()
     # TASK 2: Fetch the Vulnerability Name for the heading (JOIN or separate query)
-        new_query = text()
+        vulnamequery = text('SELECT vul_name FROM vulnerabilities WHERE id = {};'.format(vul_id))
+        vulnameresult = database.execute(vulnamequery).fetchall()
     # TASK 3: Fetch all Incidents linked to this vul_id, return incidents list
     print(result)
     print(vul_id) #this is a print statement to help you understand what data is being returned
-    return render_template('incidents.html', vulnerability = vul_id, message = "Hello Stirling!")
+    return render_template('incidents.html', vulnerability = vulnameresult[0][0], message = "", incidents = result)
 
+@app.route('/add-incident', methods=['GET'])
+def show_form():
+    return render_template('add-incident.html')
+
+@app.route('/add-incident/', methods=['POST'])
+def add_incident():
+    print('hi stirling')
+    inc_name = request.form['inc_name']
+    inc_url = request.form['inc_url']
+    inc_year = request.form['inc_year']
+    vul_id = request.form['vul_id']
+    
+    with engine.connect() as connection:
+        query = text("INSERT INTO incidents (inc_name, inc_url, inc_year, vul_id) VALUES ('{}', {}, '{}', {}, '{}');".format(inc_name, inc_url, inc_year, vul_id))
+        connection.execute(query, {
+            
+        })
+    connection.execute(text(insert_statement))
+    connection.commit()
+    
+    return render_template('add-incident.html')
 
 
 app.run(debug=True, reloader_type='stat', port=5000)
