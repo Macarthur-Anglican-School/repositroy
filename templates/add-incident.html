@@ -1,23 +1,26 @@
 {% extends 'base.html' %}
 
 {% block heading %}
-Add an incident
+
 {% endblock %}
 
 {% block content %}
-<form action = "/incidents" method="POST">
-    <label for='inc_name'>Incident Name:</label>
-    <input type='text' id='inc_name' name='inc_name'><br><br>
+<form action = "/add-incident/" method="POST">
+    <input type='hidden' name="vul_id" value={{ vul_id }}>
+    <div>
+        <label for="inc_name">Company Name:</label>
+        <input type="text" id="inc_name" name="inc_name" />
+    </div>
+    <div>
+        <label for="inc_url">Incident URL:</label>
+        <input type="url" id="inc_url" name="inc_url" />
+    </div>
+    <div>
+        <label for="inc_year">Incident Year:</label>
+        <input type="number" id="inc_year" name="inc_year" />
+    </div>
 
-    <label for='inc_url'>URL:</label>
-    <input type='text' id='inc_url' name='inc_url'><br><br>
+    <button type="submit">Submit</button>
 
-    <label for='inc_year'>Year:</label>
-    <input type='number' id='inc_year' name='inc_year'><br><br>
-
-    <label for='vul_id'>Rank:</label>
-    <input type='number' id='vul_id' name='vul_id'><br><br>
-
-    <input type='submit' value='Submit Incident'>
 </form>
 {% endblock %}

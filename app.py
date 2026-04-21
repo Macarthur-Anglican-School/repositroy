@@ -28,11 +28,12 @@ def incident_page(vul_id):
     # TASK 3: Fetch all Incidents linked to this vul_id, return incidents list
     print(result)
     print(vul_id) #this is a print statement to help you understand what data is being returned
-    return render_template('incidents.html', vulnerability = vulnameresult[0][0], message = "", incidents = result)
+    return render_template('incidents.html', vulnerability = vulnameresult[0][0], message = "", incidents = result, vul_id=vul_id)
 
-@app.route('/add-incident', methods=['GET'])
-def show_form():
-    return render_template('add-incident.html')
+@app.route('/add-incident/<vul_id>')
+def show_form(vul_id):
+    
+    return render_template('add-incident.html', vul_id = vul_id)
 
 @app.route('/add-incident/', methods=['POST'])
 def add_incident():
@@ -50,7 +51,7 @@ def add_incident():
     connection.execute(text(insert_statement))
     connection.commit()
     
-    return render_template('add-incident.html')
+    return render_template('/')
 
 
 app.run(debug=True, reloader_type='stat', port=5000)
