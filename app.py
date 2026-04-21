@@ -4,7 +4,7 @@ from sqlalchemy import create_engine, text
 app = Flask(__name__)
 
 engine = create_engine('sqlite:///.database/cyberwatch.db') #link to the cyberwatch database here
-
+connection = engine.connect()
 #route for index.html
 @app.route('/')
 def home():
@@ -43,11 +43,7 @@ def add_incident():
     inc_year = request.form['inc_year']
     vul_id = request.form['vul_id']
     
-    with engine.connect() as connection:
-        query = text("INSERT INTO incidents (inc_name, inc_url, inc_year, vul_id) VALUES ('{}', {}, '{}', {}, '{}');".format(inc_name, inc_url, inc_year, vul_id))
-        connection.execute(query, {
-            
-        })
+    insert_statement = text("INSERT INTO incidents (inc_name, inc_url, inc_year, vul_id) VALUES ('{}', '{}', {}, {});".format(inc_name, inc_url, inc_year, vul_id))
     connection.execute(text(insert_statement))
     connection.commit()
     

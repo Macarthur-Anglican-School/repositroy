@@ -6,11 +6,15 @@
 
 {% block content %}
 <form action = "/add-incident/" method="POST">
-    <input type='hidden' name="vul_id" value={{ vul_id }}>
     <div>
         <label for="inc_name">Company Name:</label>
         <input type="text" id="inc_name" name="inc_name" />
     </div>
+    <input type='hidden' name="vul_id" value={{ vul_id }}>
+#owasp rank
+    <div>
+        <label for="inc_name">
+
     <div>
         <label for="inc_url">Incident URL:</label>
         <input type="url" id="inc_url" name="inc_url" />
@@ -19,7 +23,6 @@
         <label for="inc_year">Incident Year:</label>
         <input type="number" id="inc_year" name="inc_year" />
     </div>
-
     <button type="submit">Submit</button>
 
 </form>
