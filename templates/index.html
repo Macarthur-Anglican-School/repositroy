@@ -2,19 +2,35 @@
 
 <!-- update the heading to be OWASP Vulnerabilities -->
 
-
-<!-- Use a for loop to display the OWASP ranks in a table. -->
 {% block content %}
 
 <div class="row">
     {% for v in vulnerabilities %}
+
     <div class="col-12 col-md-6 mb-3">
-        <div class="card p-3">
+
+        <div class="card p-3
+            {% if v.owasp_rank <= 3 %}
+                bg-danger text-white
+            {% elif v.owasp_rank <= 6 %}
+                bg-warning text-dark
+            {% else %}
+                bg-success text-white
+            {% endif %}
+        ">
+
             <h1>Rank: {{ v.owasp_rank }}</h1>
             <p>{{ v.vul_name }}</p>
-            <a href="/incidents/{{ v.id }}" class="btn btn-primary">View</a>
+
+            <a href="/incidents/{{ v.id }}" class="btn btn-light">
+                View
+            </a>
+
         </div>
+
     </div>
+
     {% endfor %}
 </div>
+
 {% endblock %}

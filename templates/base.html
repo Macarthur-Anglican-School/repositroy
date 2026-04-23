@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <link rel="manifest" href="/static/manifest.json">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,12 +10,12 @@
     </head>
     <body>
         <h1>Cyberwatch</h1>
-        <img src='/static/icons/icon-192.png' height='70'>
+        <img src='/static/icons/icon-192.png' height='70' width='70' alt="Cyberwatch logo">
         <h2>{% block heading%}Vulnerabilities tracker{% endblock %}</h2>
             
-        <div class='content'>
+        <main class='content'>
             {% block content %}{% endblock %}
-        </div>
+        </main>
         <script src="static/js/script.js">
             
         </script> 
