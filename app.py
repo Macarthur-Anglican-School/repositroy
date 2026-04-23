@@ -37,17 +37,25 @@ def show_form(vul_id):
 
 @app.route('/add-incident/', methods=['POST'])
 def add_incident():
-    print('hi stirling')
     inc_name = request.form['inc_name']
     inc_url = request.form['inc_url']
     inc_year = request.form['inc_year']
     vul_id = request.form['vul_id']
-    
-    insert_statement = text("INSERT INTO incidents (inc_name, inc_url, inc_year, vul_id) VALUES ('{}', '{}', {}, {});".format(inc_name, inc_url, inc_year, vul_id))
-    connection.execute(text(insert_statement))
+
+    insert_statement = text("""
+        INSERT INTO incidents (inc_name, inc_url, inc_year, vul_id)
+        VALUES (:inc_name, :inc_url, :inc_year, :vul_id)
+    """)
+
+    connection.execute(insert_statement, {
+        "inc_name": inc_name,
+        "inc_url": inc_url,
+        "inc_year": inc_year,
+        "vul_id": vul_id
+    })
     connection.commit()
-    
-    return render_template('/')
+
+    return redirect(f"/incidents/{vul_id}")
 
 
 app.run(debug=True, reloader_type='stat', port=5000)
